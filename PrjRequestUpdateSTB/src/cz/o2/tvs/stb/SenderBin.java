@@ -13,10 +13,10 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SenderBin{
+public class SenderBin {
 
     Logger _LOG = Logger.getLogger(SenderBin.class.getName());
-   
+
     private static final String CONTENT_TYPE = "image/bin";
 
     public void init(String filePatch) {
