@@ -1,0 +1,35 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+  <servlet>
+    <servlet-name>RequestSTB</servlet-name>
+    <servlet-class>cz.o2.tvs.stb.servlet.RequestSTB</servlet-class>
+    <load-on-startup>1</load-on-startup>
+    <enabled>true</enabled>
+  </servlet>
+  <servlet>
+    <servlet-name>ConfirmConnect</servlet-name>
+    <servlet-class>cz.o2.vs.ustb.ConfirmConnect</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RequestSTB</servlet-name>
+    <url-pattern>/upgrade/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ConfirmConnect</servlet-name>
+    <url-pattern>/confirmconnect</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+      <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+  <filter>
+    <filter-name>RequestAllFilter</filter-name>
+    <filter-class>cz.o2.tvs.stb.filter.RequestRedirect</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>RequestAllFilter</filter-name>
+    <url-pattern>/upgrade</url-pattern>
+    <dispatcher>REQUEST</dispatcher>
+  </filter-mapping>
+</web-app>

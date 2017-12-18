@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<view xmlns="http://xmlns.oracle.com/jdeveloper/1211/offlinedb">
+  <name>current_stb_version_fw</name>
+  <SQLQuery>
+    <queryString>select `ng_stb_boot`.`stb`.`ID` AS `ID`,`ng_stb_boot`.`stb`.`MAC` AS `MAC`,`ng_stb_boot`.`category`.`TYPE` AS `CATEGORY`,`ng_stb_boot`.`register_fw`.`VERSION` AS `VERSION`,`ng_stb_boot`.`image_stb`.`NAME` AS `IMAGE` from (((`ng_stb_boot`.`stb` join `ng_stb_boot`.`category`) join `ng_stb_boot`.`register_fw`) join `ng_stb_boot`.`image_stb`) where ((`ng_stb_boot`.`stb`.`VERSION_FW` = `ng_stb_boot`.`register_fw`.`ID`) and (`ng_stb_boot`.`stb`.`IMAGE` = `ng_stb_boot`.`register_fw`.`IMG_TYPE`) and (`ng_stb_boot`.`stb`.`CATEGORY` = `ng_stb_boot`.`category`.`ID`) and (`ng_stb_boot`.`stb`.`IMAGE` = `ng_stb_boot`.`image_stb`.`ID`)) order by `ng_stb_boot`.`stb`.`MAC`</queryString>
+  </SQLQuery>
+  <forceOnCreate>false</forceOnCreate>
+  <properties>
+    <entry>
+      <key>OfflineDBConstants.IMPORT_SOURCE_CONNECTION</key>
+      <value class="java.lang.String">ngstbDB</value>
+    </entry>
+    <entry>
+      <key>OfflineDBConstants.IMPORT_SOURCE_ID</key>
+      <value class="oracle.javatools.db.ReferenceID">
+        <name>current_stb_version_fw</name>
+        <schemaName>ng_stb_boot</schemaName>
+        <type>VIEW</type>
+      </value>
+    </entry>
+  </properties>
+  <schema>
+    <name>ng_stb_boot</name>
+  </schema>
+</view>

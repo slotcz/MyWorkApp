@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+  <persistence-unit name="PrjServletRequestSTB" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>cz.o2.tvs.db.CurrentStbVersionFw</class>
+    <class>cz.o2.tvs.db.RegisterFw</class>
+    <class>cz.o2.tvs.db.Model</class>
+    <class>cz.o2.tvs.db.ImageStb</class>
+    <class>cz.o2.tvs.db.Category</class>
+    <class>cz.o2.tvs.db.Stb</class>
+    <class>cz.o2.tvs.db.History</class>
+    <class>cz.o2.tvs.db.History1</class>    
+    <properties>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.14.4.131:3306/ng_stb_boot"/>
+      <!-- property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ng_stb_boot"/ -->
+      <property name="javax.persistence.jdbc.user" value="ng_stb_boot"/>
+      <property name="javax.persistence.jdbc.password" value="D06FEE0706E78CF865E1B975EE61EC03"/>
+      <property name="eclipselink.logging.level" value="FINER"/>
+    </properties>
+  </persistence-unit>
+</persistence>
