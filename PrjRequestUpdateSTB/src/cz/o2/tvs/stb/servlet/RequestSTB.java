@@ -43,7 +43,9 @@ public class RequestSTB extends HttpServlet {
         } else {
             try {
                 line = request.getRequestURL().toString();
-                String[] splitPath = request.getPathInfo().trim().split("/");
+                String[] splitPath = request.getPathInfo()
+                                            .trim()
+                                            .split("/");
                 pathImage = splitPath[1]; // image
                 varMAC = request.getParameter("mac");
                 varFWversion = request.getParameter("current_firmware_version");
@@ -82,7 +84,8 @@ public class RequestSTB extends HttpServlet {
         out.print(varFWversion + ",");
         out.print("Firmware version " + varFWversion + ",");
         InetAddress ip = InetAddress.getLocalHost();
-        out.print("http://" + ip.getHostName() + ":28083/upgrade/" + pathImage + "/"); //10.32.204.199 /webUpgradeSTB 8080
+       //    out.print("http://" + ip.getHostAddress() + ":8080/upgrade/" + pathImage + "/");
+       out.print("http://" + ip.getHostAddress() + ":28083/upgrade/" + pathImage + "/"); //10.32.204.199 /webUpgradeSTB 8080
         // out.print("http://localhost:8080/webUpgradeSTB/upgrade/" + pathImage + "/");
         out.print(checker.getcodePath(varFWversion, varMAC)); // varFWversion
         out.println("");
