@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "RequestSTB", urlPatterns = { "/upgrade/*" }) //
 public class RequestSTB extends HttpServlet {
+    @SuppressWarnings("compatibility:2991048014199066562")
+    private static final long serialVersionUID = 5257497995762430951L;
     private static final String CONTENT_TYPE = "text/html; charset=UTF-8";
     private String varMAC = "";
     private String varFWversion = "";
@@ -26,7 +28,7 @@ public class RequestSTB extends HttpServlet {
     private String pathImage = "";
     private CheckerVersion checker;
 
-    Logger _LOG = Logger.getLogger(RequestSTB.class.getName());
+    transient Logger _LOG = Logger.getLogger(RequestSTB.class.getName());
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -80,7 +82,7 @@ public class RequestSTB extends HttpServlet {
         out.print(varFWversion + ",");
         out.print("Firmware version " + varFWversion + ",");
         InetAddress ip = InetAddress.getLocalHost();
-        out.print("http://" + ip.getHostName() + ":8080/webUpgradeSTB/upgrade/" + pathImage + "/"); //10.32.204.199
+        out.print("http://" + ip.getHostName() + ":28083/upgrade/" + pathImage + "/"); //10.32.204.199 /webUpgradeSTB 8080
         // out.print("http://localhost:8080/webUpgradeSTB/upgrade/" + pathImage + "/");
         out.print(checker.getcodePath(varFWversion, varMAC)); // varFWversion
         out.println("");
