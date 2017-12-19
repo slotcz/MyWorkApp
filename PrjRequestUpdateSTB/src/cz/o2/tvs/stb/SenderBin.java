@@ -31,8 +31,8 @@ public class SenderBin {
         String strLog = " sendData ##### line=" + request.getRequestURL().toString();
         _LOG.info(strLog);
         response.setContentType(CONTENT_TYPE);
-        //filePatch = "/home/slotcz/files/upgrade/psi/4.10.7enc/firmware.bin";
-        filePatch = "c:/files/upgrade/psi/4.10.7enc/firmware.bin";
+       filePatch = "/mnt/data/sftp/stb_firmware/files/upgrade/psi/4.12.11enc/firmware.bin";
+        //filePatch = "c:/files/upgrade/psi/4.10.7enc/firmware.bin";
         File file = new File(filePatch);
         if (file.exists()) {
             // Prepare streams.
@@ -50,6 +50,9 @@ public class SenderBin {
             fis.close();
             bout.close();
             out.close();
+        }else{
+             strLog = " sendData #####  file=" + file.getAbsolutePath()+" notfound";
+            _LOG.info(strLog);
         }
 
     }
