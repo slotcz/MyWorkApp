@@ -12,10 +12,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "RegisterFw.findAll", query = "select o from RegisterFw o") })
+@NamedQueries({ @NamedQuery(name = "RegisterFw.findAll", query = "select o from RegisterFw o"),
+                // select *, MAX(DATE_FW) from ng_stb_boot.register_fw  group by CATEGORY;
+                    @NamedQuery(name = "RegisterFw.findByKey", query = "select o from RegisterFw o"),
+                @NamedQuery(name = "RegisterFw.findLastVersion", query = "select o, MAX(r.dateFw)  from RegisterFw o, RegisterFw r  group by r.category")})
 @Table(name = "\"register_fw\"")
 public class RegisterFw implements Serializable {
     private static final long serialVersionUID = 2947882263802952609L;
+    @Column(name = "CATEGORY")
     private int category;
     @Column(name = "CODE_PATCH")
     private String codePatch;
@@ -30,6 +34,8 @@ public class RegisterFw implements Serializable {
     private String manualPath;
     private int model;
     private String version;
+    
+    private transient Timestamp dateFwMax;
 
     public RegisterFw() {
     }
@@ -108,4 +114,14 @@ public class RegisterFw implements Serializable {
     public void setVersion(String version) {
         this.version = version;
     }
+
+    public void setDateFwMax(Timestamp dateFwMax) {
+        this.dateFwMax = dateFwMax;
+    }
+
+    public Timestamp getDateFwMax() {
+        return dateFwMax;
+    }
+
+   
 }

@@ -13,8 +13,8 @@
     <class>cz.o2.tvs.db.History1</class>    
     <properties>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.14.4.131:3306/ng_stb_boot"/>
-      <!-- property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ng_stb_boot"/ -->
+      <!-- property name="javax.persistence.jdbc.url" value="jdbc:mysql://10.14.4.131:3306/ng_stb_boot"/ -->
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ng_stb_boot"/>
       <property name="javax.persistence.jdbc.user" value="ng_stb_boot"/>
       <property name="javax.persistence.jdbc.password" value="D06FEE0706E78CF865E1B975EE61EC03"/>
       <property name="eclipselink.logging.level" value="FINER"/>

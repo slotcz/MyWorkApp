@@ -18,6 +18,8 @@ public class SenderBin {
     Logger _LOG = Logger.getLogger(SenderBin.class.getName());
 
     private static final String CONTENT_TYPE = "image/bin";
+   // private static final String FILES_PREFIX = "c:/files/upgrade";
+   private static final String FILES_PREFIX = "/mnt/data/sftp/stb_firmware/files/upgrade";
 
     public void init(String filePatch) {
         File file = new File(filePatch);
@@ -26,13 +28,16 @@ public class SenderBin {
 
     }
 
-    @SuppressWarnings("oracle.jdeveloper.java.nested-assignment")
+
     public void sendData(HttpServletRequest request, HttpServletResponse response, String filePatch) throws ServletException, IOException {
-        String strLog = " sendData ##### line=" + request.getRequestURL().toString();
+
+        filePatch = request.getPathInfo().toString();
+        String strLog = " sendData ##### path=" + filePatch;
         _LOG.info(strLog);
         response.setContentType(CONTENT_TYPE);
-       filePatch = "/mnt/data/sftp/stb_firmware/files/upgrade/psi/4.12.11enc/firmware.bin";
-        //filePatch = "c:/files/upgrade/psi/4.10.7enc/firmware.bin";
+
+        // filePatch = "/mnt/data/sftp/stb_firmware/files/upgrade/psi/4.12.11enc/firmware.bin";
+        filePatch = FILES_PREFIX + filePatch;
         File file = new File(filePatch);
         if (file.exists()) {
             // Prepare streams.
@@ -50,11 +55,12 @@ public class SenderBin {
             fis.close();
             bout.close();
             out.close();
-        }else{
-             strLog = " sendData #####  file=" + file.getAbsolutePath()+" notfound";
+        } else {
+            strLog = " sendData #####  file=" + file.getAbsolutePath() + " notfound";
             _LOG.info(strLog);
         }
-
+        strLog = " sendData #####  file=" + file.getAbsolutePath();
+        _LOG.info(strLog);
     }
 
 

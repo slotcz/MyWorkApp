@@ -1,5 +1,9 @@
 package cz.o2.tvs.db;
-
+/*
+ * 1 - user
+ * 2 - test
+ * 3 - blocked user
+ */
 import java.io.Serializable;
 
 import javax.persistence.Column;

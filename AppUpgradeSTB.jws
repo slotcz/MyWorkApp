@@ -26,5 +26,6 @@
    </list>
    <list n="listOfChildren">
       <hash><url n="URL" path="PrjRequestUpdateSTB/PrjRequestUpdateSTB.jpr"/></hash>
+      <hash><url n="URL" path="StbEmulator/StbEmulator.jpr"/></hash>
    </list>
 </jws:workspace>

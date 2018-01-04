@@ -1,13 +1,8 @@
 package cz.o2.tvs.db;
 
 
-import cz.o2.tvs.stb.servlet.RequestSTB;
-
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
-import java.util.concurrent.locks.ReadWriteLock;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -18,9 +13,9 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 public class NG_STB_ServiceFacade {
-    
+
     Logger _LOG = Logger.getLogger(NG_STB_ServiceFacade.class.getName());
-    
+
     private final EntityManager em;
 
     public NG_STB_ServiceFacade() {
@@ -104,7 +99,7 @@ public class NG_STB_ServiceFacade {
         em.getTransaction().begin();
         em.persist(entity);
         em.getTransaction().commit();
-        _LOG.info("AFTER commit MAC = "+entity.getMac());
+        _LOG.info("AFTER commit MAC = " + entity.getMac());
     }
 
     public Map getMapSTB() {
@@ -112,6 +107,36 @@ public class NG_STB_ServiceFacade {
         List<Stb> listStb = em.createNamedQuery("Stb.findAll", Stb.class).getResultList();
         Map<Integer, Stb> result;
         result = (Map<Integer, Stb>) listStb.stream().collect(Collectors.toMap(Stb::getId, (p) -> p));
+
+        return result;
+    }
+
+    public Map getMapSTBByMAC() {
+        List<Stb> listStb = em.createNamedQuery("Stb.findAll", Stb.class).getResultList();
+        Map<String, Stb> result;
+        result = (Map<String, Stb>) listStb.stream().collect(Collectors.toMap(Stb::getMac, (p) -> p));
+        return result;
+    }
+
+    public RegisterFw getLastVersionFwByCategory(int iCategory) {
+        RegisterFw result = null;
+
+        List<RegisterFw> listRFW;
+        // Collection listRFW;
+        String sqlString = "select o.*  from ng_stb_boot.register_fw o  where o.DATE_FW = (select MAX(r.DATE_FW) from ng_stb_boot.register_fw r where o.CATEGORY = r.CATEGORY group by r.CATEGORY)";
+        Query query = em.createNativeQuery(sqlString, RegisterFw.class);
+        listRFW = query.getResultList();
+        //       listRFW = em.createNamedQuery("RegisterFw.findLastVersion",RegisterFw.class ).getResultList();
+        for (RegisterFw rfw: listRFW) {
+            _LOG.info(rfw.toString());
+        }
+        /**/
+        for (RegisterFw rfw : listRFW) {
+            if ( rfw.getCategory() == iCategory) {
+                result = rfw;
+                _LOG.info( "result = rfw " + rfw.toString());
+            }
+        }
 
         return result;
     }
