@@ -123,5 +123,31 @@ public class RegisterFw implements Serializable {
         return dateFwMax;
     }
 
-   
+    @Override
+    public String toString() {      
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(getClass().getName() + "@" + Integer.toHexString(hashCode()));
+        buffer.append('[');
+        buffer.append("id=");
+        buffer.append(getId());
+        buffer.append(',');
+        buffer.append("codePatch=");
+        buffer.append(getCodePatch());
+        buffer.append(',');
+        buffer.append("Category=");
+        buffer.append(getCategory());
+        buffer.append(',');
+        buffer.append("Image=");
+        buffer.append(getImgType());
+        buffer.append(',');
+        buffer.append("Version=");
+        buffer.append(getVersion());
+        buffer.append(',');
+        buffer.append("dateFw=");
+        buffer.append(getDateFw());
+        buffer.append(',');
+        buffer.append(']');
+        return buffer.toString();
+    }
+
 }

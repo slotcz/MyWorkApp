@@ -36,8 +36,10 @@ public class RequestSTB extends HttpServlet {
     }
 
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String strLog = " public void service line=" + line + "*endline*";
+        
+        String strLog = " public void service line=" +  request.getRequestURL().toString() + "*endline*";
         _LOG.info(strLog);
+        
         if (request.getParameterMap().size() <= 0) {
             SenderBin senderBin = new SenderBin();
             senderBin.sendData(request, response, "");
@@ -58,15 +60,18 @@ public class RequestSTB extends HttpServlet {
                 "***** line=" + line + "*endline*" + " path=" + pathImage + "*endpath* " + " mac=" + varMAC + "*mac*" + " current_firmware_version=" +
                 varFWversion + "*current_firmware_version*";
             _LOG.info(strLog);
-
-            if (checker.checkMAC(varMAC)) {
-                varFWversion = checker.getNewVersion(varMAC, pathImage, varFWversion);
-                if (!varFWversion.isEmpty()) {
-                    responcer(response);
-                    // responcerImage(response);
+            //TODO for debug only if (pathImage.equals("psi"))
+            
+            {
+                if (checker.checkMAC(varMAC)) {
+                    varFWversion = checker.getNewVersion(varMAC, pathImage, varFWversion);
+                    if (!varFWversion.isEmpty()) {
+                        responcer(response);
+                        // responcerImage(response);
+                    }
+                } else {
+                    _LOG.warning(" The device address " + varMAC + " is not in the database or is in the black list.");
                 }
-            } else {
-                _LOG.warning(" The device address " + varMAC + " is not in the database or is in the black list.");
             }
         }
     }
@@ -89,15 +94,15 @@ public class RequestSTB extends HttpServlet {
         out.print(varFWversion + ",");
         out.print("Firmware version " + varFWversion + ",");
         InetAddress ip = InetAddress.getLocalHost();
-        
-        //      out.print("http://pds.o2tv.cz/upgrade/" + pathImage + "/");
-        
-       //TODO debug only  out.print("http://" + ip.getHostName() + ":8080/upgrade/" + pathImage + "/");
-                
-       out.print("http://" + ip.getHostAddress() + ":28083/upgrade/" + pathImage + "/"); //10.32.204.199 /webUpgradeSTB 8080
-        
-       //   out.print("http://" + ip.getHostName() + ":8080/webUpgradeSTB/upgrade/" + pathImage + "/");
-        
+
+       out.print("http://pds.o2tv.cz/upgrade/" + pathImage + "/");
+
+        //TODO debug only  out.print("http://" + ip.getHostName() + ":8080/upgrade/" + pathImage + "/");
+
+        //       out.print("http://" + ip.getHostAddress() + ":28083/upgrade/" + pathImage + "/"); //10.32.204.199 /webUpgradeSTB 8080
+
+        //   out.print("http://" + ip.getHostName() + ":8080/webUpgradeSTB/upgrade/" + pathImage + "/");
+
         out.print(checker.getcodePath(varFWversion, varMAC)); // varFWversion
         out.println("");
         out.close();

@@ -118,7 +118,7 @@ public class NG_STB_ServiceFacade {
         return result;
     }
 
-    public RegisterFw getLastVersionFwByCategory(int iCategory) {
+    public RegisterFw getLastVersionFwByCategory(int iCategory, int image) {
         RegisterFw result = null;
 
         List<RegisterFw> listRFW;
@@ -128,13 +128,14 @@ public class NG_STB_ServiceFacade {
         listRFW = query.getResultList();
         //       listRFW = em.createNamedQuery("RegisterFw.findLastVersion",RegisterFw.class ).getResultList();
         for (RegisterFw rfw: listRFW) {
-            _LOG.info(rfw.toString());
+            _LOG.info("public RegisterFw getLastVersionFwByCategory = " + rfw.toString());
         }
         /**/
         for (RegisterFw rfw : listRFW) {
-            if ( rfw.getCategory() == iCategory) {
+            if ( rfw.getCategory() == iCategory && rfw.getImgType() == image  ) {
                 result = rfw;
-                _LOG.info( "result = rfw " + rfw.toString());
+                _LOG.info( "result  rfw = " + rfw.toString());
+                break;
             }
         }
 

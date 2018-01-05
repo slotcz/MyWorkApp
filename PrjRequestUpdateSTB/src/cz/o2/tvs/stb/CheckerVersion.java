@@ -120,6 +120,7 @@ public class CheckerVersion {
         
         Stb stb = (Stb) mapSTBbyMAC.get(varMAC); // category
         int k = stb.getCategory();
+        
         /*
         if(mapSTBbyMAC.containsKey(varMAC)){
 
@@ -129,12 +130,13 @@ public class CheckerVersion {
         */
         LOG.info("pathImage=" + pathImage + " k=" + k + " j=" + j + " for NAC=" + varMAC);
         for (int i = 0; i < countSTB; i++) {
-
+            //TODO for debug only
+          /*
             if (versFW[i][j][k] != null) {
                 if (versFW[i][j][k].getMac().equals(varMAC)) {
                     result = versFW[i][j][k].getVersion().toString();
                     LOG.info("[i][j][k]" + i + " " + j + " " + k);
-                    /*  */if (!varFWversion.isEmpty()) {
+                  if (!varFWversion.isEmpty()) {
                         LOG.info("result=" + result + "*endResult*");
                         if (verifyVersion(varFWversion, result) <= 0) {
                             result = "";
@@ -143,13 +145,16 @@ public class CheckerVersion {
                     // Stb stb = (Stb) mapSTB.get(versFW[i][j][k].getId());
                     stb.setVersionFw(versFW[i][j][k].getId_version());
                     updateVersionStb(stb);
-
+                    break;
                 }
-            } else { // havn't info last version into register stb, take last version from register_fm
-                RegisterFw regFw = srvcFacade.getLastVersionFwByCategory(k);
+                
+            } else
+*/ { // havn't info last version into register stb, take last version from register_fm
+                RegisterFw regFw = srvcFacade.getLastVersionFwByCategory(k, j);
                 stb.setVersionFw(regFw.getId());
                 updateVersionStb(stb);
                 result = regFw.getVersion().toString();
+                break;
             }
         }
 
